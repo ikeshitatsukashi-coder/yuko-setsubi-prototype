@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お問い合わせ｜有限会社友好設備</title>
+<meta name="description" content="有限会社友好設備へのお問い合わせ。工事のご依頼・採用エントリー・協力会社様のお問い合わせはこちらから。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&family=Caveat:wght@500;700&family=Outfit:wght@400;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="page-sub">
+
+<header class="site-header">
+  <div class="site-header__inner">
+    <a href="../" class="site-header__logo"><img src="../../shared/logo/logo-header.png" srcset="../../shared/logo/logo-header.png 1x, ../../shared/logo/logo@2x.png 2x" alt="有限会社友好設備" class="brand-logo"></a>
+    <nav class="gnav"><ul>
+      <li><a href="../about/">About</a></li><li><a href="../service/">Service</a></li>
+      <li><a href="../recruit/">Recruit</a></li><li><a href="../blog/">Blog</a></li>
+      <li><a href="../news/">News</a></li><li><a href="./" class="is-current">Contact</a></li>
+    </ul></nav>
+    <a href="../recruit/" class="entry-btn">採用エントリー<span>→</span></a>
+    <button class="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+<section class="page-hero">
+  <div class="page-hero__bg" style="background-image:url('../../shared/images/vehicle-truck.jpg')"></div>
+  <div class="page-hero__glow"></div>
+  <div class="page-hero__inner">
+    <p class="page-hero__en">Contact</p>
+    <h1 class="page-hero__jp">お問い合わせ</h1>
+    <nav class="breadcrumb"><a href="../">HOME</a><span>/</span><span>Contact</span></nav>
+  </div>
+</section>
+
+<section class="page-section page-section--white">
+  <div class="container">
+    <p class="page-lead">
+      工事のご依頼、採用エントリー、協力会社様のお問い合わせなど、<br>
+      お気軽にご連絡ください。<br>
+      1〜2 営業日以内に担当よりご返信いたします。
+    </p>
+
+    <!-- Quick contact card -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:880px;margin:32px auto 64px">
+      <div style="background:var(--sky-pale);border-radius:16px;padding:32px;text-align:center">
+        <p style="font-family:var(--ff-en);font-size:12px;letter-spacing:.22em;color:var(--sky);font-weight:900">TEL</p>
+        <p style="font-family:var(--ff-en);font-size:32px;font-weight:900;color:var(--navy);margin:8px 0"><a href="tel:048-287-0666">048-287-0666</a></p>
+        <p style="font-size:13px;color:var(--gray)">平日 8:00 – 18:00 / 日祝定休</p>
+      </div>
+      <div style="background:var(--sky-pale);border-radius:16px;padding:32px;text-align:center">
+        <p style="font-family:var(--ff-en);font-size:12px;letter-spacing:.22em;color:var(--sky);font-weight:900">FAX</p>
+        <p style="font-family:var(--ff-en);font-size:32px;font-weight:900;color:var(--navy);margin:8px 0">048-287-0665</p>
+        <p style="font-size:13px;color:var(--gray)">24 時間受付</p>
+      </div>
+    </div>
+
+    <form class="contact-form" onsubmit="event.preventDefault(); alert('お問い合わせありがとうございます。\\n（プロトタイプにつき実際の送信は行われません）');">
+      <div class="form-row">
+        <label for="type">お問い合わせ種別<span class="req">必須</span></label>
+        <select id="type" name="type" required>
+          <option value="">選択してください</option>
+          <option value="work">工事のご依頼・お見積り</option>
+          <option value="recruit">採用エントリー</option>
+          <option value="partner">協力会社・パートナーのご相談</option>
+          <option value="press">取材・プレスのお問い合わせ</option>
+          <option value="other">その他</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <label for="name">お名前<span class="req">必須</span></label>
+        <input type="text" id="name" name="name" required placeholder="例：友好太郎">
+      </div>
+      <div class="form-row">
+        <label for="company">会社名・団体名</label>
+        <input type="text" id="company" name="company" placeholder="任意">
+      </div>
+      <div class="form-row">
+        <label for="email">メールアドレス<span class="req">必須</span></label>
+        <input type="email" id="email" name="email" required placeholder="example@yuko-setsubi.co.jp">
+      </div>
+      <div class="form-row">
+        <label for="tel">電話番号</label>
+        <input type="tel" id="tel" name="tel" placeholder="例：048-287-0666">
+      </div>
+      <div class="form-row">
+        <label for="message">お問い合わせ内容<span class="req">必須</span></label>
+        <textarea id="message" name="message" required placeholder="お問い合わせの内容をご記入ください"></textarea>
+      </div>
+      <div class="form-row" style="flex-direction:row;align-items:center;gap:10px">
+        <input type="checkbox" id="agree" required style="width:auto">
+        <label for="agree" style="font-weight:400;font-size:13px"><a href="#" style="color:var(--sky);border-bottom:1px solid var(--sky)">プライバシーポリシー</a>に同意します<span class="req">必須</span></label>
+      </div>
+      <div class="form-submit">
+        <button type="submit" class="btn btn--primary btn--lg">この内容で送信する<span>→</span></button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- Access -->
+<section class="page-section page-section--pale">
+  <div class="container">
+    <p class="section-eyebrow" style="text-align:center">Access</p>
+    <h2 class="section-title" style="text-align:center"><span>アクセス</span></h2>
+    <div class="map-wrap" style="margin-top:32px;max-width:1080px;margin-left:auto;margin-right:auto">
+      <iframe src="https://www.google.com/maps?q=%E5%9F%BC%E7%8E%89%E7%9C%8C%E5%B7%9D%E5%8F%A3%E5%B8%82%E5%A4%A7%E5%AD%97%E5%AE%89%E8%A1%8C%E9%A0%98%E6%A0%B9%E5%B2%B81167&output=embed" loading="lazy"></iframe>
+    </div>
+    <p style="text-align:center;margin-top:24px;font-size:14px;color:var(--ink);line-height:1.9">
+      〒334-0058 埼玉県川口市大字安行領根岸1167<br>
+      東京外環自動車道「川口東IC」より車で約10分／東武スカイツリーライン「東川口駅」より車で約12分
+    </p>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="site-footer__grid">
+      <div class="site-footer__brand">
+        <img src="../../shared/logo/logo-white-header.png" srcset="../../shared/logo/logo-white-header.png 1x, ../../shared/logo/logo-white@2x.png 2x" alt="有限会社友好設備" class="brand-logo brand-logo--footer">
+        <small class="brand-tagline">Yuko Setsubi Co.,Ltd. / since 1980</small>
+        <address class="footer-address">〒334-0058<br>埼玉県川口市大字安行領根岸1167<br>TEL: <a href="tel:048-287-0666">048-287-0666</a> / FAX: 048-287-0665</address>
+      </div>
+      <div class="site-footer__cols">
+        <div><h4>About</h4><ul><li><a href="../about/">会社案内</a></li><li><a href="../about/#message">代表メッセージ</a></li><li><a href="../about/#history">沿革</a></li><li><a href="../about/#company">会社概要</a></li></ul></div>
+        <div><h4>Service</h4><ul><li><a href="../service/">事業内容</a></li><li><a href="../service/#civil">土木工事</a></li><li><a href="../service/#pipe">管工事</a></li><li><a href="../service/#water">水道施設工事</a></li><li><a href="../service/#tobi">とび・土工</a></li><li><a href="../service/#paving">舗装工事</a></li></ul></div>
+        <div><h4>Recruit</h4><ul><li><a href="../recruit/">採用情報</a></li><li><a href="../recruit/#people">先輩社員</a></li><li><a href="../recruit/#welfare">福利厚生</a></li><li><a href="../recruit/#flow">1日の流れ</a></li></ul></div>
+        <div><h4>Other</h4><ul><li><a href="../blog/">ブログ</a></li><li><a href="../news/">お知らせ</a></li><li><a href="./">お問い合わせ</a></li></ul></div>
+      </div>
+    </div>
+    <p class="copy">&copy; 1980 YUKO SETSUBI Co.,Ltd. All Rights Reserved.</p>
+  </div>
+</footer>
+<script src="../js/main.js"></script>
+</body>
+</html>
