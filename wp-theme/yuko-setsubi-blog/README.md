@@ -48,11 +48,44 @@ define( 'YUKO_MAIN_SITE_URL', 'https://yukousetsubi.com' );
 ```
 ※ デフォルトでは `https://yukousetsubi.com` を指しています。開発時は GitHub Pages URL等に書き換え可。
 
-### 5. 推奨プラグイン（任意）
+### 5. 🔒 ログインURLの秘匿（最重要）
+
+WordPressデフォルトの `/wp-login.php` は誰でもアクセスできるため、**ブルートフォース攻撃の標的**になります。本テーマは社員専用の **秘密ログインURL** 機構を組み込み済みです。
+
+#### 設定方法
+`functions.php` 冒頭の `YUKO_LOGIN_SLUG` を、社員だけが知る秘密の文字列に変更：
+
+```php
+define( 'YUKO_LOGIN_SLUG', 'yuko-staff-2026' );  // ← この値を変更
+```
+
+例：`yuko-2026-admin`、`zubizubi-water`、`shizuku-kun-login` 等、推測困難な文字列に。
+
+#### 動作
+- ✅ **社員**：`https://blog.yukousetsubi.com/yuko-staff-2026` → ログイン画面表示
+- ❌ **一般ユーザー**：`/wp-login.php` 直アクセス → **404を返す（存在を隠す）**
+- ❌ **一般ユーザー**：`/wp-admin/` 直アクセス（未ログイン） → **404**
+- ✅ **ログアウト・パスワードリセット**：通常通り機能
+
+#### 社員への案内
+- 秘密URLを口頭または社内SlackなどでLIGO側のみと共有
+- 紙への印刷・社外メール送信は厳禁
+- LIGOで該当slugを管理
+
+### 6. 推奨プラグイン
+
+#### 必須
 - **WP Multibyte Patch**（日本語環境最適化／公式推奨）
-- **Yoast SEO** または **All in One SEO**（SEO対策）
-- **EWWW Image Optimizer**（画像自動圧縮）
+- **Limit Login Attempts Reloaded**（ログイン失敗回数制限・ブルートフォース防止）
 - **BackWPup**（自動バックアップ）
+
+#### 強く推奨
+- **Wordfence Security** または **SiteGuard WP Plugin**（総合セキュリティ）
+- **EWWW Image Optimizer**（画像自動圧縮）
+- **Yoast SEO** または **All in One SEO**（SEO対策）
+
+#### 不要
+- ~~WPS Hide Login~~ → 本テーマに同等機能が内蔵済みのため
 
 ---
 
@@ -86,12 +119,17 @@ define( 'YUKO_MAIN_SITE_URL', 'https://yukousetsubi.com' );
 
 ### 本番デプロイ前チェックリスト
 - [ ] `YUKO_MAIN_SITE_URL` を本番URLに設定
+- [ ] **🔒 `YUKO_LOGIN_SLUG` を秘密の文字列に変更**
 - [ ] パーマリンク「投稿名」設定
 - [ ] サンプル記事を1本投稿して動作確認
 - [ ] アイキャッチ画像が一覧で適切に表示されるか
 - [ ] お知らせ投稿タイプが管理メニューに出ているか
 - [ ] メインサイトのナビからブログへのリンクが正しい
 - [ ] SSL（https）が有効
+- [ ] 秘密ログインURLでアクセス可能か（`https://blog.〜/yuko-staff-2026`）
+- [ ] `/wp-login.php` 直アクセスが404になるか
+- [ ] `/wp-admin/` 未ログイン直アクセスが404になるか
+- [ ] Limit Login Attempts Reloaded 有効化
 - [ ] サーチコンソール登録（必要なら）
 
 ---

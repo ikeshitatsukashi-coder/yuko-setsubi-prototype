@@ -10,6 +10,77 @@ if ( ! defined( 'YUKO_MAIN_SITE_URL' ) ) {
 	define( 'YUKO_MAIN_SITE_URL', 'https://yukousetsubi.com' );
 }
 
+/* ===========================================
+ * 秘密ログインURL（社員のみアクセス可能）
+ * ↓本番リリース前に必ず変更してください
+ * 例: 'yuko-staff-2026' → https://blog.yukousetsubi.com/yuko-staff-2026
+ * =========================================== */
+if ( ! defined( 'YUKO_LOGIN_SLUG' ) ) {
+	define( 'YUKO_LOGIN_SLUG', 'yuko-staff-2026' );
+}
+
+/**
+ * /wp-login.php と /wp-admin/ を一般ユーザーから隠す
+ * - 秘密スラッグ経由のアクセスのみ許可
+ * - 秘密スラッグなしの直接アクセスは 404
+ * - ログアウト・パスワードリセットは引き続き機能
+ */
+function yuko_hide_login_init() {
+	if ( ! defined( 'YUKO_LOGIN_SLUG' ) || ! YUKO_LOGIN_SLUG ) return;
+
+	$slug = YUKO_LOGIN_SLUG;
+	$req  = isset( $_SERVER['REQUEST_URI'] ) ? $_SERVER['REQUEST_URI'] : '';
+	$path = wp_parse_url( $req, PHP_URL_PATH );
+	$path = $path ? trim( $path, '/' ) : '';
+
+	// ① 秘密スラッグでのアクセス → /wp-login.php に内部的に渡す
+	if ( $path === $slug ) {
+		// クッキー埋め込み（後続の認証フローを通すため）
+		setcookie( 'yuko_login_ok', '1', time() + 600, COOKIEPATH, COOKIE_DOMAIN, is_ssl(), true );
+		$_COOKIE['yuko_login_ok'] = '1';
+		require_once ABSPATH . 'wp-login.php';
+		exit;
+	}
+
+	// ② /wp-login.php 直アクセス → 404
+	if ( strpos( $req, 'wp-login.php' ) !== false ) {
+		// ログアウト・パスワードリセット等は許可
+		$allowed_actions = array( 'logout', 'postpass', 'rp', 'resetpass', 'lostpassword', 'register' );
+		$action = isset( $_REQUEST['action'] ) ? $_REQUEST['action'] : '';
+		// 秘密フローを通ってきている場合は許可
+		$has_cookie = isset( $_COOKIE['yuko_login_ok'] );
+		if ( ! in_array( $action, $allowed_actions, true ) && ! $has_cookie ) {
+			yuko_force_404();
+		}
+	}
+
+	// ③ /wp-admin/ 直アクセス（未ログイン） → 404
+	if ( strpos( $req, 'wp-admin' ) !== false && ! is_user_logged_in() ) {
+		// admin-ajax と admin-post は通す（フロント側で使うため）
+		if ( strpos( $req, 'admin-ajax.php' ) === false && strpos( $req, 'admin-post.php' ) === false ) {
+			yuko_force_404();
+		}
+	}
+}
+add_action( 'init', 'yuko_hide_login_init', 1 );
+
+function yuko_force_404() {
+	status_header( 404 );
+	nocache_headers();
+	global $wp_query;
+	$wp_query->set_404();
+	$tpl = get_query_template( '404' );
+	if ( $tpl ) include $tpl;
+	exit;
+}
+
+/* ログイン後のリダイレクト先：管理画面ダッシュボード */
+function yuko_login_redirect( $redirect_to, $request, $user ) {
+	if ( isset( $user->ID ) ) return admin_url();
+	return $redirect_to;
+}
+add_filter( 'login_redirect', 'yuko_login_redirect', 10, 3 );
+
 /* テーマサポート */
 function yuko_setup() {
 	add_theme_support( 'title-tag' );
