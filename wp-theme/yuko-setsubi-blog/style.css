@@ -1,0 +1,14 @@
+/*
+Theme Name: Yuko Setsubi Blog
+Theme URI: https://yukousetsubi.com/
+Author: LIGO Inc.
+Author URI: https://li-go.jp/
+Description: 有限会社友好設備 様のブログ・お知らせ用WordPressテーマ。pattern-cデザイン準拠。
+Version: 1.0.0
+Requires at least: 6.0
+Requires PHP: 7.4
+License: Proprietary
+Text Domain: yuko-setsubi-blog
+*/
+
+/* このファイルはテーマ識別用。実CSSは assets/css/style.css を functions.php で読み込み */

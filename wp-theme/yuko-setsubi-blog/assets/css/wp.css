@@ -1,0 +1,120 @@
+/* WordPress特有の調整・記事本文の体裁 */
+
+/* 記事本文 */
+.entry-content h2 {
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--navy);
+  margin: 56px 0 16px;
+  padding-left: 16px;
+  border-left: 4px solid var(--sky);
+  line-height: 1.5;
+}
+.entry-content h3 {
+  font-size: 20px;
+  font-weight: 900;
+  color: var(--navy);
+  margin: 40px 0 12px;
+}
+.entry-content h4 {
+  font-size: 17px;
+  font-weight: 900;
+  color: var(--navy);
+  margin: 32px 0 10px;
+}
+.entry-content p { margin: 0 0 24px; }
+.entry-content a {
+  color: var(--sky-deep, #2E8FBE);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.entry-content a:hover { color: var(--navy); }
+.entry-content img,
+.entry-content .wp-block-image img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 12px;
+  margin: 24px 0;
+}
+.entry-content ul,
+.entry-content ol {
+  padding-left: 28px;
+  margin: 0 0 24px;
+}
+.entry-content li { margin-bottom: 8px; }
+.entry-content blockquote {
+  border-left: 4px solid var(--sky-light);
+  background: var(--sky-pale);
+  padding: 20px 24px;
+  margin: 24px 0;
+  border-radius: 0 12px 12px 0;
+  font-style: normal;
+  color: var(--ink);
+}
+.entry-content code {
+  background: var(--sky-pale);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-family: ui-monospace, "SF Mono", monospace;
+  font-size: 14px;
+}
+.entry-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 24px 0;
+}
+.entry-content th,
+.entry-content td {
+  border: 1px solid var(--border);
+  padding: 12px 16px;
+  text-align: left;
+}
+.entry-content th {
+  background: var(--sky-pale);
+  color: var(--navy);
+  font-weight: 900;
+}
+.entry-content .wp-block-image figcaption {
+  font-size: 13px;
+  color: var(--gray);
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* WP特有のクラス補正 */
+.alignleft  { float: left;  margin: 0 24px 16px 0; }
+.alignright { float: right; margin: 0 0 16px 24px; }
+.aligncenter { display: block; margin: 24px auto; }
+.alignwide { max-width: 1100px; margin-left: auto; margin-right: auto; }
+
+/* ページネーション */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 48px;
+}
+.pagination a,
+.pagination span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font-family: var(--ff-en);
+  font-weight: 700;
+  color: var(--navy);
+  text-decoration: none;
+  background: #fff;
+  transition: .2s;
+}
+.pagination a:hover { background: var(--sky-pale); border-color: var(--sky); }
+.pagination .current,
+.pagination .is-current { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+/* WP管理バー表示時のヘッダー位置調整 */
+body.admin-bar .site-header { top: 32px; }
+@media (max-width: 782px) { body.admin-bar .site-header { top: 46px; } }
