@@ -677,12 +677,29 @@ body.page-sub .site-footer__brand{display:flex;flex-direction:column;align-items
   .gnav.open ul li a::after{ display:none; }
 
   /* ハンバーガーを常時表示（TOP・下層共通）+ 最前面に + アイコン変化 */
-  .hamburger,
-  body.page-home .hamburger,
-  body.page-sub .hamburger{
-    display:flex;
+  .site-header .hamburger,
+  body.page-home .site-header .hamburger,
+  body.page-sub .site-header .hamburger{
+    display:flex !important;
     position:relative;
     z-index:201;
+    background:none;
+    border:0;
+    flex-direction:column;
+    gap:5px;
+    width:32px;
+    height:26px;
+    justify-content:center;
+    cursor:pointer;
+    margin-left:auto;
+    padding:0;
+  }
+  .site-header .hamburger span{
+    display:block;
+    width:100%;
+    height:2px;
+    background:var(--navy);
+    transition:transform .3s, opacity .2s;
   }
   .hamburger[aria-expanded="true"] span:nth-child(1){ transform:translateY(7px) rotate(45deg); }
   .hamburger[aria-expanded="true"] span:nth-child(2){ opacity:0; }
