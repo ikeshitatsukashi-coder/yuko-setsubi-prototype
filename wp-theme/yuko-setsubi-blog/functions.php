@@ -5,15 +5,15 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-/* メインサイト(コーポレート)URL。本番は yukousetsubi.com、開発時は適宜上書き */
+/* メインサイト(コーポレート)URL。本番は yukohsetsubi.com、開発時は適宜上書き */
 if ( ! defined( 'YUKO_MAIN_SITE_URL' ) ) {
-	define( 'YUKO_MAIN_SITE_URL', 'https://yukousetsubi.com' );
+	define( 'YUKO_MAIN_SITE_URL', 'https://yukohsetsubi.com' );
 }
 
 /* ===========================================
  * 秘密ログインURL（社員のみアクセス可能）
  * ↓本番リリース前に必ず変更してください
- * 例: 'yuko-staff-2026' → https://blog.yukousetsubi.com/yuko-staff-2026
+ * 例: 'yuko-staff-2026' → https://blog.yukohsetsubi.com/yuko-staff-2026
  * =========================================== */
 if ( ! defined( 'YUKO_LOGIN_SLUG' ) ) {
 	define( 'YUKO_LOGIN_SLUG', 'yuko-staff-2026' );

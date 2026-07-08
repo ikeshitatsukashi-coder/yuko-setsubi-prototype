@@ -29,7 +29,7 @@ yuko-setsubi-blog/
 
 ### 1. WordPressをインストール
 - お名前.com（または他レンタルサーバー）の管理画面で **WordPress簡単インストール**
-- インストール先：`blog.yukousetsubi.com`（サブドメイン本番想定）または `〜.sakura.ne.jp` 等の開発用URL
+- インストール先：`blog.yukohsetsubi.com`（サブドメイン本番想定）または `〜.sakura.ne.jp` 等の開発用URL
 
 ### 2. テーマをアップロード
 1. WordPress管理画面 → 外観 → テーマ → 新しいテーマを追加 → **テーマのアップロード**
@@ -44,9 +44,9 @@ yuko-setsubi-blog/
 ### 4. メインサイトURL設定
 `functions.php` の冒頭にある定数 `YUKO_MAIN_SITE_URL` を本番URLに合わせて編集：
 ```php
-define( 'YUKO_MAIN_SITE_URL', 'https://yukousetsubi.com' );
+define( 'YUKO_MAIN_SITE_URL', 'https://yukohsetsubi.com' );
 ```
-※ デフォルトでは `https://yukousetsubi.com` を指しています。開発時は GitHub Pages URL等に書き換え可。
+※ デフォルトでは `https://yukohsetsubi.com` を指しています。開発時は GitHub Pages URL等に書き換え可。
 
 ### 5. 🔒 ログインURLの秘匿（最重要）
 
@@ -62,7 +62,7 @@ define( 'YUKO_LOGIN_SLUG', 'yuko-staff-2026' );  // ← この値を変更
 例：`yuko-2026-admin`、`zubizubi-water`、`shizuku-kun-login` 等、推測困難な文字列に。
 
 #### 動作
-- ✅ **社員**：`https://blog.yukousetsubi.com/yuko-staff-2026` → ログイン画面表示
+- ✅ **社員**：`https://blog.yukohsetsubi.com/yuko-staff-2026` → ログイン画面表示
 - ❌ **一般ユーザー**：`/wp-login.php` 直アクセス → **404を返す（存在を隠す）**
 - ❌ **一般ユーザー**：`/wp-admin/` 直アクセス（未ログイン） → **404**
 - ✅ **ログアウト・パスワードリセット**：通常通り機能
