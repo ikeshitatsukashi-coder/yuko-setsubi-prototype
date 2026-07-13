@@ -586,12 +586,12 @@ body.page-sub .site-footer__brand{display:flex;flex-direction:column;align-items
 
 /* Karuta cards */
 .karuta{display:grid;grid-template-columns:repeat(4, 1fr);gap:20px}
-.karuta__card{background:var(--white);border-radius:20px;padding:32px 22px;box-shadow:0 6px 20px -8px rgba(14,42,71,.15);position:relative;overflow:hidden;transition:transform .35s, box-shadow .35s;border:1px solid var(--border);min-height:200px;display:flex;flex-direction:column;justify-content:flex-end}
+.karuta__card{background:var(--white);border-radius:20px;padding:82px 26px 30px;box-shadow:0 6px 20px -8px rgba(14,42,71,.15);position:relative;overflow:hidden;transition:transform .35s, box-shadow .35s;border:1px solid var(--border);min-height:260px;display:flex;flex-direction:column;justify-content:flex-start;gap:12px}
 .karuta__card:hover{transform:translateY(-6px);box-shadow:0 18px 36px -12px rgba(14,42,71,.25)}
-.karuta__chip{position:absolute;top:18px;left:18px;width:48px;height:48px;border-radius:50%;background:var(--sky);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;box-shadow:0 6px 14px -4px rgba(91,185,224,.6)}
-.karuta__num{font-family:var(--ff-display);font-weight:400;font-size:54px;color:var(--sky-light);position:absolute;top:14px;right:18px;line-height:1}
-.karuta__card h3{font-size:20px;font-weight:900;color:var(--navy);margin-bottom:8px}
-.karuta__card p{font-size:13px;line-height:1.7;color:var(--ink)}
+.karuta__chip{position:absolute;top:22px;left:22px;width:48px;height:48px;border-radius:50%;background:var(--sky);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;box-shadow:0 6px 14px -4px rgba(91,185,224,.6)}
+.karuta__num{font-family:var(--ff-display);font-weight:400;font-size:54px;color:var(--sky-light);position:absolute;top:18px;right:22px;line-height:1}
+.karuta__card h3{font-size:20px;font-weight:900;color:var(--navy);margin:0;line-height:1.5}
+.karuta__card p{font-size:13.5px;line-height:1.95;color:var(--ink);margin:0}
 
 /* Voice rows */
 .voice-row{display:grid;grid-template-columns:280px 1fr;gap:48px;align-items:center;margin-bottom:72px;max-width:980px}
