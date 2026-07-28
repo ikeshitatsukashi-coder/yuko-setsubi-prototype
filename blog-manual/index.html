@@ -213,11 +213,17 @@ section.step:nth-child(even){background:var(--sky-pale)}
 
 /* Print */
 @media print{
+  @page{margin:0}
   body{background:#fff}
   .cover,.doc-footer{background:var(--navy)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
   section.step:nth-child(even){background:var(--sky-pale)!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-  section.step{page-break-before:auto;page-break-inside:avoid}
-  .substep,.mockup,.callout,.faq{page-break-inside:avoid}
+  /* 表紙・目次・各ステップをそれぞれ独立ページに */
+  .cover{page-break-after:always;min-height:100vh;display:flex;flex-direction:column;justify-content:center}
+  .toc{page-break-after:always;margin:48px auto!important}
+  section.step{page-break-before:always;padding:56px 0}
+  section.step:first-of-type{page-break-before:auto}
+  /* 各パーツは途中で切らない */
+  .step-head,.substeps,.substep,.mockup,.callout,.faq,.faq-list{page-break-inside:avoid}
   .cover__mascot{display:none}
 }
 
