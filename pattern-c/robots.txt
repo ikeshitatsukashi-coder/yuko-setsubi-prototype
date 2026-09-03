@@ -1,0 +1,5 @@
+# 有限会社友好設備 (YUKOH SETSUBI Co.,Ltd.)
+User-agent: *
+Allow: /
+
+Sitemap: https://yukoh-setsubi.co.jp/sitemap.xml
