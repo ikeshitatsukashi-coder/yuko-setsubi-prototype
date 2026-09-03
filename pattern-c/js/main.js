@@ -13,42 +13,28 @@ document.querySelectorAll('.section-title, .topics__list li, .stat, .person, .jo
 // People modal
 const persons = {
   '1': {
-    name:'T.S', role:'施工管理 / 入社5年目',
+    name:'西岡さん', role:'27歳 / 一度離れて戻ってきた「出戻り」',
     qa:[
-      ['Q1. 友好設備に入った理由は？','前職は飲食店で、ずっと「形に残るしごと」をやりたかったんです。地元・川口の会社で、社長との面接で「うちは家族だよ」と言ってくれた言葉が決め手でした。'],
-      ['Q2. 仕事の魅力は？','現場が完成して、車が走り出した瞬間。あの達成感はちょっと他の仕事にはないですね。'],
-      ['Q3. これから入る人へ','体力勝負と思われがちですが、いまは機械化が進んでます。意外と頭を使う仕事です。']
+      ['出戻りで、また友好設備へ','実は僕は出戻りで、一度外構の会社に移ったことがありました。そこが基本的に1人作業、土日すら休めなくて…。現場で友好設備の先輩にばったり会ったりするたびに「戻りたいな…」って思ってたんです。でもなかなか言い出せなくて…そしたら村井さんが「さっさと戻ってこいよ！」ってしつこく誘ってくれたんです（笑）'],
+      ['戻ってきて思うのは、とにかく「居心地が良い！」','戻ってきて思うのは、とにかく「居心地が良い！」こと。8時15分スタートで17時15分には終わるし、有給も取りやすい。GW・お盆・年末年始は長いと10連休くらいになるので、小さい子どもがいる身としては本当にありがたいです。'],
+      ['社長の畑の、おすそ分け','あと、置き場にいると社長の畑の野菜や果物が山盛りで置いてあるので、家で野菜を買わなくて大丈夫ですよ！（笑）']
     ]
   },
   '2': {
-    name:'K.M', role:'管工事 / 入社2年目',
+    name:'村井さん', role:'46歳 / 勤続20年',
     qa:[
-      ['Q1. 友好設備に入った理由は？','飲食店を辞めて、手に職を付けたかったから。「未経験OK」と書かれた求人をたくさん見て、社長の面接が一番フランクだった友好設備に決めました。'],
-      ['Q2. 仕事の魅力は？','資格取得を全部会社が支援してくれます。すでに5つ取りました。'],
-      ['Q3. これから入る人へ','工具の名前も知らないところから始めましたが、先輩が毎日教えてくれます。']
-    ]
-  },
-  '3': {
-    name:'H.A', role:'土木 / 入社14年目',
-    qa:[
-      ['Q1. 友好設備に入った理由は？','地元の友人の紹介でした。最初は3年くらいでと思っていたら、いつのまにか14年。'],
-      ['Q2. 仕事の魅力は？','「家族のような会社」と言うとベタですが、本当にそうなんです。社長は名前で呼んでくれるし、誕生日にはみんなで肉を焼きます。'],
-      ['Q3. これから入る人へ','人間関係で悩んだことがありません。それが一番のおすすめポイントです。']
-    ]
-  },
-  '4': {
-    name:'Y.N', role:'舗装 / 入社1年目',
-    qa:[
-      ['Q1. 友好設備に入った理由は？','高校で進学か就職か迷ったとき、「手に職をつけてほしい」と父に勧められて。'],
-      ['Q2. 仕事の魅力は？','まだ覚えることだらけですが、毎日見える景色が変わっていくのは楽しいです。'],
-      ['Q3. これから入る人へ','若い人がもっと増えてほしいです。先輩がやさしいので安心して飛び込んできて。']
+      ['入社のキッカケは「家から近かった」だけ！','ここに決めた一番の理由は、正直に言うと「家から近かった」から（笑）前の型枠の現場は遠くて、17時に終わっても家に着くのは18時過ぎ。近所を散歩していて、たまたま見つけたのが友好設備だったんです。'],
+      ['続いてる理由は、やっぱり「人」','入ってみて続いてる理由は、やっぱり「人」ですね！最初は水道の締め方ひとつとっても不安で。でも「大丈夫だよ！一応見とくから！」って先輩が一言かけてくれるだけでフッと安心できる。他の現場だと言葉が強めな世界もあるけど、うちはみんな丁寧で穏やか。広島から出てきた自分にもすごく馴染みやすかったですね。'],
+      ['気がついたら、もう入社20年','水道ってライフライン、人の生活に直結する仕事です。現場でお客さんからお菓子やジュースをいただいたり、「ありがとう」って直接言ってもらえる。いい仕事だなぁって、20年やっても思います！興味を持って頂けたら、ちょっと遊びに来て下さい！']
     ]
   }
 };
 
 const modal = document.getElementById('personModal');
-const modalBody = modal.querySelector('.person-modal__body');
-const closeBtn = modal.querySelector('.person-modal__close');
+const modalBody = modal ? modal.querySelector('.person-modal__body') : null;
+const closeBtn = modal ? modal.querySelector('.person-modal__close') : null;
+
+if(modal && modalBody && closeBtn){
 
 document.querySelectorAll('.person').forEach(card=>{
   card.addEventListener('click',()=>{
@@ -75,6 +61,8 @@ modal.addEventListener('click',(e)=>{
   }
 });
 
+} // end if(modal)
+
 // Hamburger toggle
 const hb = document.querySelector('.hamburger');
 const nav = document.querySelector('.gnav');
@@ -88,15 +76,17 @@ if(hb && nav){
 
 // Sticky entry shows only after hero
 const stickyEntry = document.querySelector('.sticky-entry');
-window.addEventListener('scroll', ()=>{
-  if(window.scrollY > window.innerHeight * .6){
-    stickyEntry.style.opacity = '1';
-    stickyEntry.style.pointerEvents = 'auto';
-  } else {
-    stickyEntry.style.opacity = '0';
-    stickyEntry.style.pointerEvents = 'none';
-  }
-},{passive:true});
-stickyEntry.style.transition = 'opacity .3s, transform .25s, background .25s';
-stickyEntry.style.opacity = '0';
-stickyEntry.style.pointerEvents = 'none';
+if(stickyEntry){
+  window.addEventListener('scroll', ()=>{
+    if(window.scrollY > window.innerHeight * .6){
+      stickyEntry.style.opacity = '1';
+      stickyEntry.style.pointerEvents = 'auto';
+    } else {
+      stickyEntry.style.opacity = '0';
+      stickyEntry.style.pointerEvents = 'none';
+    }
+  },{passive:true});
+  stickyEntry.style.transition = 'opacity .3s, transform .25s, background .25s';
+  stickyEntry.style.opacity = '0';
+  stickyEntry.style.pointerEvents = 'none';
+}

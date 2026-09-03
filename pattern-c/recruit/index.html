@@ -130,9 +130,51 @@
   <div class="container">
     <p class="section-eyebrow" style="text-align:center">People</p>
     <h2 class="section-title" style="text-align:center"><span>働く仲間の、<br>すなおな話。</span></h2>
-    <p class="page-lead" style="max-width:640px;margin:0 auto">現在、社員インタビューを準備中です。<br>取材の上、随時公開してまいります。</p>
+    <p class="page-lead" style="max-width:640px;margin:0 auto">実際に働く2人に、包み隠さず話してもらいました。<br>カードをタップすると全文が読めます。</p>
+    <div class="people__grid people__grid--2" style="margin-top:40px">
+      <article class="person" data-id="1">
+        <div class="person__photo p1">
+          <svg class="person-svg" viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="52" r="19" fill="#fff"/>
+            <path d="M38 47a22 22 0 0 1 44 0z" fill="#FFC93C"/>
+            <rect x="34" y="45" width="52" height="6" rx="3" fill="#FFC93C"/>
+            <path d="M24 112c0-19 16-30 36-30s36 11 36 30z" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="person__body">
+          <span class="person__role">27歳 / 出戻り入社</span>
+          <p class="person__name">西岡さん</p>
+          <p class="person__hook">戻ってきて思うのは、<br>とにかく「居心地が良い！」</p>
+          <span class="person__more">READ MORE →</span>
+        </div>
+      </article>
+      <article class="person" data-id="2">
+        <div class="person__photo p2">
+          <svg class="person-svg" viewBox="0 0 120 120" aria-hidden="true">
+            <circle cx="60" cy="52" r="19" fill="#fff"/>
+            <path d="M38 47a22 22 0 0 1 44 0z" fill="#5BB9E0"/>
+            <rect x="34" y="45" width="52" height="6" rx="3" fill="#5BB9E0"/>
+            <path d="M24 112c0-19 16-30 36-30s36 11 36 30z" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="person__body">
+          <span class="person__role">46歳 / 勤続20年</span>
+          <p class="person__name">村井さん</p>
+          <p class="person__hook">入社のキッカケは<br>「家から近かった」だけ！</p>
+          <span class="person__more">READ MORE →</span>
+        </div>
+      </article>
+    </div>
   </div>
 </section>
+
+<!-- Modal for People -->
+<div class="person-modal" id="personModal" aria-hidden="true">
+  <div class="person-modal__inner">
+    <button class="person-modal__close" aria-label="閉じる">×</button>
+    <div class="person-modal__body"></div>
+  </div>
+</div>
 
 <!-- 1日の流れ -->
 <section class="page-section page-section--white" id="flow">
@@ -197,7 +239,8 @@
 </section>
 
 <!-- 募集要項 -->
-<section class="page-section page-section--white">
+<!-- トップの「求人要項を見る」が recruit/#requirements を指すため id が必要 -->
+<section class="page-section page-section--white" id="requirements">
   <div class="container">
     <p class="section-eyebrow" style="text-align:center">Requirements</p>
     <h2 class="section-title" style="text-align:center"><span>募集要項</span></h2>

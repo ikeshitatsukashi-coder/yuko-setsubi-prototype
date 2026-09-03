@@ -103,7 +103,9 @@ button{background:none;border:0;cursor:pointer;font:inherit;color:inherit}
 section{padding:120px 0;position:relative}
 .section-eyebrow{font-family:var(--ff-en);font-size:13px;letter-spacing:.3em;color:var(--sky-deep);font-weight:900;margin-bottom:14px;text-transform:uppercase}
 .section-title{font-size:clamp(32px, 5vw, 56px);font-weight:900;line-height:1.2;color:var(--navy);margin-bottom:32px;letter-spacing:.02em;font-family:var(--ff-ja)}
-.section-title--white{color:#fff}
+/* 後方(634行付近)の .section-title が同詳細度で色を上書きしてしまうため、
+   クラス2つ分の詳細度にして白を確実に効かせる */
+.section-title.section-title--white{color:#fff}
 .all-link{display:inline-flex;align-items:center;gap:8px;font-family:var(--ff-en);font-size:12px;letter-spacing:.2em;color:var(--navy);font-weight:900;border-bottom:2px solid var(--accent);padding-bottom:4px;transition:gap .25s}
 .all-link:hover{gap:14px}
 
@@ -141,6 +143,17 @@ section{padding:120px 0;position:relative}
 .people{background:var(--navy);color:#fff;position:relative;overflow:hidden}
 .people::before{content:"PEOPLE";position:absolute;top:-30px;right:-20px;font-family:var(--ff-display);font-weight:400;font-size:clamp(140px,20vw,260px);color:rgba(91,185,224,.08);line-height:1;pointer-events:none;letter-spacing:.05em}
 .people__lead{font-size:14px;color:rgba(255,255,255,.7);margin-bottom:48px}
+/* インタビューが2枚のみで縦に間延びするため、この節だけ余白を詰める。
+   トップ(.people)と採用情報(.page-section)でクラスが違うので id で揃える
+   （section{padding:120px 0} / .page-section{padding:100px 0} /
+     .section-title{margin-bottom:48px} を上書き） */
+#people{padding:76px 0}
+#people .section-title{margin-bottom:20px}
+#people .people__lead,
+#people .page-lead{margin-bottom:32px}
+@media (max-width: 700px){
+  #people{padding:56px 0}
+}
 .people__grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;z-index:1}
 .person{background:#fff;border-radius:18px;overflow:hidden;cursor:pointer;transition:transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s;color:var(--navy)}
 .person:hover{transform:translateY(-10px) rotate(-1deg);box-shadow:0 30px 50px -20px rgba(91,185,224,.4)}
@@ -157,6 +170,20 @@ section{padding:120px 0;position:relative}
 .person__name{font-family:var(--ff-display);font-weight:400;font-size:34px;color:var(--navy);line-height:1;margin-bottom:10px;letter-spacing:.06em}
 .person__hook{font-size:14px;font-weight:700;line-height:1.6;color:var(--ink);margin-bottom:14px}
 .person__more{display:inline-flex;align-items:center;gap:6px;font-family:var(--ff-en);font-size:11px;letter-spacing:.18em;color:var(--sky-deep);font-weight:900}
+/* 社員インタビュー2名構成：4カラムだと間延びするため2カラム中央寄せにする。
+   氏名は和文なので Anton ではなく和文フォントで表示する */
+.people__grid--2{grid-template-columns:repeat(2,1fr);gap:24px;max-width:760px;margin:0 auto}
+/* 写真ではなくアイコンなので、画像枠いっぱいに広げず小さな丸アバターにする */
+.people__grid--2 .person__photo{
+  aspect-ratio:auto;width:60px;height:60px;border-radius:50%;
+  margin:24px 0 0 24px;flex:none;
+}
+.people__grid--2 .person__body{padding:16px 24px 24px}
+.people__grid--2 .person__name{font-family:var(--ff-ja);font-weight:900;font-size:24px;letter-spacing:.04em;line-height:1.3}
+.people__grid--2 .person:hover .person-svg{transform:none}
+@media (max-width: 700px){
+  .people__grid--2{grid-template-columns:1fr;max-width:420px}
+}
 
 /* =========================
    Job
@@ -264,12 +291,16 @@ section{padding:120px 0;position:relative}
   background:var(--accent);color:var(--navy);
   padding:18px 26px;border-radius:999px;font-family:var(--ff-en);font-weight:900;letter-spacing:.18em;font-size:14px;
   box-shadow:0 18px 32px -12px rgba(255,201,60,.7);
-  display:inline-flex;align-items:center;gap:8px;
+  display:none;align-items:center;gap:8px;
   transition:transform .25s ease, background .25s ease;
 }
 .sticky-entry span{transition:transform .25s}
 .sticky-entry:hover{background:#FFD86A;transform:translateY(-4px)}
 .sticky-entry:hover span{transform:translateX(4px)}
+/* PC幅ではヘッダーのENTRYボタンと重複するため非表示。狭幅のみ表示する */
+@media (max-width: 980px){
+  .sticky-entry{display:inline-flex}
+}
 
 /* =========================
    Modal (person)
@@ -419,6 +450,10 @@ section{padding:120px 0;position:relative}
 
 /* Entry steps */
 .entry-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;counter-reset:entry}
+/* 5ステップ版（事業内容ページの工事の流れ）。
+   インラインstyleで指定すると後段のメディアクエリを上書きしてしまい
+   スマホで5列のまま横スクロールが発生するため、クラスとして定義する */
+.entry-steps--5{grid-template-columns:repeat(5,1fr)}
 .entry-step{background:#fff;border:1px solid var(--border);border-radius:16px;padding:28px 22px;text-align:center;position:relative;counter-increment:entry}
 .entry-step::before{content:"STEP " counter(entry, decimal-leading-zero);display:block;font-family:var(--ff-en);font-weight:900;font-size:11px;letter-spacing:.22em;color:var(--sky);margin-bottom:12px}
 .entry-step h4{font-size:16px;font-weight:900;color:var(--navy);margin-bottom:8px}
@@ -710,10 +745,12 @@ body.page-sub .site-footer__brand{display:flex;flex-direction:column;align-items
   .header-cta .cta--primary{ padding:10px 14px; font-size:12px; }
 }
 
-.avatar-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+/* 代表写真は元画像(1600x1200 横長)の右寄りに被写体がいるため、
+   縦長枠でのトリミング位置を右へずらして顔が切れないようにする */
+.avatar-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% 45%;border-radius:inherit}
 .voice-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:50%}
 .person-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.ceo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;border-radius:inherit}
+.ceo-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:72% 45%;border-radius:inherit}
 .ceo-avatar{overflow:hidden}
 .message__photo{overflow:hidden}
 .ceo-message__photo{overflow:hidden}
