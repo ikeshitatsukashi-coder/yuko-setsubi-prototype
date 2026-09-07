@@ -5,15 +5,15 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-/* メインサイト(コーポレート)URL。本番は yukoh-setsubi.co.jp、開発時は適宜上書き */
+/* メインサイト(コーポレート)URL。本番は yukoh-setsubi.jp、開発時は適宜上書き */
 if ( ! defined( 'YUKO_MAIN_SITE_URL' ) ) {
-	define( 'YUKO_MAIN_SITE_URL', 'https://yukoh-setsubi.co.jp' );
+	define( 'YUKO_MAIN_SITE_URL', 'https://yukoh-setsubi.jp' );
 }
 
 /* ===========================================
  * 秘密ログインURL（社員のみアクセス可能）
  * ↓本番リリース前に必ず変更してください
- * 例: 'yuko-staff-2026' → https://blog.yukoh-setsubi.co.jp/yuko-staff-2026
+ * 例: 'yuko-staff-2026' → https://blog.yukoh-setsubi.jp/yuko-staff-2026
  * =========================================== */
 if ( ! defined( 'YUKO_LOGIN_SLUG' ) ) {
 	define( 'YUKO_LOGIN_SLUG', 'yuko-staff-2026' );

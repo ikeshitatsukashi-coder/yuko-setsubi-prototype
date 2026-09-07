@@ -28,9 +28,9 @@
 - 福利厚生: 皆勤手当・賞与年2回・昇給・社員旅行（パラオ実績）・マイカー通勤OK など
 
 ## 主要ページ
-- トップ: https://yukoh-setsubi.co.jp/
-- 会社案内: https://yukoh-setsubi.co.jp/about/
-- 事業内容: https://yukoh-setsubi.co.jp/service/
-- 採用情報: https://yukoh-setsubi.co.jp/recruit/
-- お問い合わせ: https://yukoh-setsubi.co.jp/contact/
-- プライバシーポリシー: https://yukoh-setsubi.co.jp/privacy/
+- トップ: https://yukoh-setsubi.jp/
+- 会社案内: https://yukoh-setsubi.jp/about/
+- 事業内容: https://yukoh-setsubi.jp/service/
+- 採用情報: https://yukoh-setsubi.jp/recruit/
+- お問い合わせ: https://yukoh-setsubi.jp/contact/
+- プライバシーポリシー: https://yukoh-setsubi.jp/privacy/
