@@ -80,6 +80,13 @@
       },
       "areaServed": { "@type": "City", "name": "川口市" },
       "knowsAbout": ["上下水道工事", "漏水修理", "水道引込工事", "道路埋設管工事", "公共施設の水道工事"],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+81-48-287-0666",
+        "contactType": "customer service",
+        "areaServed": "JP",
+        "availableLanguage": "Japanese"
+      },
       "openingHoursSpecification": [
         {
           "@type": "OpeningHoursSpecification",
@@ -541,7 +548,8 @@
       <a href="tel:048-287-0666" style="font-family:var(--ff-en,'Outfit',sans-serif);font-size:28px;font-weight:900;color:#0E2A47;text-decoration:none">048-287-0666</a>
       <span style="display:block;color:#6b7f90;font-size:13px;margin-top:4px">受付 8:15–17:15 ／ 日曜・祝日定休</span>
     </p>
-    <form class="contact-form" onsubmit="event.preventDefault(); alert('お問い合わせありがとうございます。\n（プロトタイプにつき実際の送信は行われません）');">
+    <form class="contact-form" onsubmit="return yukoSend(this,event)">
+      <input type="text" name="company_url" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0">
       <div class="form-row">
         <label for="h-type">ご用件<span class="req">必須</span></label>
         <select id="h-type" name="type" required>

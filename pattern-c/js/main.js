@@ -90,3 +90,86 @@ if(stickyEntry){
   stickyEntry.style.opacity = '0';
   stickyEntry.style.pointerEvents = 'none';
 }
+
+
+/* ========= フォーム → メール送信（send.php 経由） ========= */
+function yukoSend(form, e){
+  e.preventDefault();
+  var btn = form.querySelector('button[type="submit"]');
+  var orig = btn ? btn.innerHTML : '';
+  if(btn){ btn.disabled = true; btn.innerHTML = '送信中…'; }
+  var fd = new FormData(form);
+  fd.append('ajax','1');
+  fetch('/send.php', { method:'POST', body: fd })
+    .then(function(r){ return r.json().catch(function(){ return { ok: r.ok }; }); })
+    .then(function(j){
+      if(j && j.ok){
+        form.innerHTML = '<div style="text-align:center;padding:48px 16px;color:#0E2A47">'
+          + '<p style="font-size:20px;font-weight:900;margin:0 0 10px">送信しました</p>'
+          + '<p style="color:#3f5568;line-height:1.9;margin:0">お問い合わせありがとうございます。<br>担当者より追ってご連絡いたします。</p></div>';
+      } else {
+        alert('送信に失敗しました。お手数ですが、お電話（048-287-0666）でお問い合わせください。');
+        if(btn){ btn.disabled = false; btn.innerHTML = orig; }
+      }
+    })
+    .catch(function(){
+      alert('送信に失敗しました。お手数ですが、お電話（048-287-0666）でお問い合わせください。');
+      if(btn){ btn.disabled = false; btn.innerHTML = orig; }
+    });
+  return false;
+}
+
+/* ========= WordPress連動：最新情報（お知らせ）＋ 社員ブログ（投稿） ========= */
+(function(){
+  var WP = 'https://blog.yukoh-setsubi.jp/wp-json/wp/v2/';
+  function fmtDate(s){
+    var d = new Date(s); if(isNaN(d)) return '';
+    var p = function(n){ return (n<10?'0':'')+n; };
+    return d.getFullYear()+'.'+p(d.getMonth()+1)+'.'+p(d.getDate());
+  }
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];}); }
+  function cat(it, fb){
+    try{ var t = it._embedded['wp:term'][0]; if(t && t.length){ var n=t[0].name; if(n && n!=='未分類' && n.toLowerCase()!=='uncategorized') return n; } }catch(e){}
+    return fb;
+  }
+
+  // 最新情報（news CPT）→ 固定の3件を置き換え（失敗時は固定表示を維持）
+  var topics = document.querySelector('.topics__list');
+  if(topics){
+    fetch(WP+'news?per_page=3&_embed=1')
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
+      .then(function(items){
+        if(!items || !items.length) return;
+        topics.innerHTML = items.map(function(it){
+          var title = (it.title && it.title.rendered) || '';
+          var link = it.link || 'https://blog.yukoh-setsubi.jp/news/';
+          return '<li><time>'+fmtDate(it.date)+'</time>'
+            + '<span class="tag tag--recruit">'+esc(cat(it,'お知らせ'))+'</span>'
+            + '<p><a href="'+link+'" target="_blank" rel="noopener" style="color:inherit">'+title+'</a></p></li>';
+        }).join('');
+      })
+      .catch(function(){});
+  }
+
+  // 社員ブログ（投稿）→ 固定の3枚を置き換え
+  var blog = document.querySelector('.blog__grid');
+  if(blog){
+    var DEF = '/shared/images/works-grid.jpg';
+    fetch(WP+'posts?per_page=3&_embed=1')
+      .then(function(r){ return r.ok ? r.json() : Promise.reject(); })
+      .then(function(items){
+        if(!items || !items.length) return;
+        blog.innerHTML = items.map(function(it){
+          var title = (it.title && it.title.rendered) || '';
+          var link = it.link || 'https://blog.yukoh-setsubi.jp/';
+          var img = DEF;
+          try{ var m = it._embedded['wp:featuredmedia'][0]; if(m && m.source_url) img = m.source_url; }catch(e){}
+          return '<article class="blog-card" onclick="window.open(\'' + link + '\',\'_blank\')" style="cursor:pointer">'
+            + '<div class="blog-card__thumb"><img src="'+img+'" alt="" class="thumb-img"></div>'
+            + '<span class="blog-card__cat">'+esc(cat(it,'ブログ'))+'</span>'
+            + '<h3>'+title+'</h3><time>'+fmtDate(it.date)+'</time></article>';
+        }).join('');
+      })
+      .catch(function(){});
+  }
+})();
